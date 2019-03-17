@@ -64,8 +64,7 @@ public class Spel {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Welkom bij BlackJack.");
 		System.out.println("Wil je een kaart vragen? Druk dan op k.");
-		int puntenAantal;
-		for (puntenAantal = 0; puntenAantal < 21;) {
+		for (int puntenAantal = 0; puntenAantal < 21;) {
 		String s = scan.next();
 		String k = "k";
 		String q = "q";
@@ -77,14 +76,14 @@ public class Spel {
 			Kaart randomKaart = kaarten[randomIndex];
 			System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
 			puntenAantal = puntenAantal + randomKaart.kaartWaarde;
-			if (puntenAantal < 21) {
-			System.out.println(puntenAantal);
+			if(puntenAantal < 21) {
+				System.out.println("Je hebt op dit moment " + puntenAantal + " punten.");
 			}
 			else if(puntenAantal == 21) {
-				System.out.println("Blackjack");
+				System.out.println("Blackjack!");
 			}
 			else if(puntenAantal > 21) {
-				System.out.println("Je hebt verloren.");
+				System.out.println("Je hebt verloren met " + puntenAantal + " punten.");
 			}
 			kaarten[randomIndex] = null;
 			}
@@ -102,8 +101,8 @@ public class Spel {
 				int randomIndex = random.nextInt(kaarten.length);
 				if (kaarten[randomIndex] != null) {
 				Kaart randomKaart = kaarten[randomIndex];
-				System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
-				System.out.println(puntenAantal);
+				System.out.println("Je hebt een beurt gepasst.");
+				System.out.println("Je hebt op dit moment " + puntenAantal + " punten.");
 				kaarten[randomIndex] = null;
 				}
 				else {
@@ -111,9 +110,10 @@ public class Spel {
 				}
 			}
 		}
+		}
+		}
+		
 	}
-	}
-	
 class Kaart{
 	int kaartWaarde;
 	String kaartNaam;
@@ -121,5 +121,4 @@ class Kaart{
 		kaartWaarde = waarde;
 		kaartNaam = naam;
 	}
-}
 }
