@@ -74,6 +74,7 @@ public class Spel {
 			int randomIndex = random.nextInt(kaarten.length);
 			if (kaarten[randomIndex] != null) {
 			Kaart randomKaart = kaarten[randomIndex];
+			if(randomKaart.kaartWaarde != 11) {
 			System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
 			puntenAantal = puntenAantal + randomKaart.kaartWaarde;
 			if(puntenAantal < 21) {
@@ -86,6 +87,29 @@ public class Spel {
 				System.out.println("Je hebt verloren met " + puntenAantal + " punten.");
 			}
 			kaarten[randomIndex] = null;
+			}
+			else if(randomKaart.kaartWaarde == 11) {
+				if(puntenAantal + 11 > 21) {
+					randomKaart.kaartWaarde = 1;
+					System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
+					puntenAantal = puntenAantal + randomKaart.kaartWaarde;
+					if(puntenAantal < 21) {
+						System.out.println("Je hebt op dit moment " + puntenAantal + " punten.");
+					}
+					else if(puntenAantal == 21) {
+						System.out.println("Blackjack!");
+					}					
+				}
+				else if(puntenAantal + 11 == 21) {
+					System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
+					System.out.println("Blackjack!");
+				}
+				else if(puntenAantal + 11 < 21) {
+					System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
+					puntenAantal = puntenAantal + randomKaart.kaartWaarde;
+					System.out.println("Je hebt op dit moment " + puntenAantal + " punten.");
+				}
+			}
 			}
 			else {
 				i--;
@@ -121,4 +145,10 @@ class Kaart{
 		kaartWaarde = waarde;
 		kaartNaam = naam;
 	}
+}
+class Aas extends Kaart{
+	Aas(int waarde, String naam) {
+		super(waarde, naam);
+	}
+	
 }
