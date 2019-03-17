@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Spel {
 
@@ -58,22 +59,61 @@ public class Spel {
 		kaarten[48] = new Kaart(10, "KB");
 		kaarten[49] = new Kaart(10, "KV");
 		kaarten[50] = new Kaart(10, "KH");
-		kaarten[51] = new Kaart(11, "KA");		
+		kaarten[51] = new Kaart(11, "KA");
 		Random random = new Random();
-		for (int i = 0; i < 5; i++) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Welkom bij BlackJack.");
+		System.out.println("Wil je een kaart vragen? Druk dan op k.");
+		int puntenAantal;
+		for (puntenAantal = 0; puntenAantal < 21;) {
+		String s = scan.next();
+		String k = "k";
+		String q = "q";
+		String p = "p";
+		if (k.equals(s)) {
+		for (int i = 0; i < 1; i++) {
 			int randomIndex = random.nextInt(kaarten.length);
 			if (kaarten[randomIndex] != null) {
 			Kaart randomKaart = kaarten[randomIndex];
-			System.out.println(randomKaart.kaartNaam);
+			System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
+			puntenAantal = puntenAantal + randomKaart.kaartWaarde;
+			if (puntenAantal < 21) {
+			System.out.println(puntenAantal);
+			}
+			else if(puntenAantal == 21) {
+				System.out.println("Blackjack");
+			}
+			else if(puntenAantal > 21) {
+				System.out.println("Je hebt verloren.");
+			}
 			kaarten[randomIndex] = null;
 			}
 			else {
 				i--;
 			}
 		}
+		}
+		else if(q.equals(s)) {
+			System.out.println("Je bent gestopt met het spel.");
+			puntenAantal = 0;
+		}
+		else if (p.equals(s)) {
+			for (int i = 0; i < 1; i++) {
+				int randomIndex = random.nextInt(kaarten.length);
+				if (kaarten[randomIndex] != null) {
+				Kaart randomKaart = kaarten[randomIndex];
+				System.out.println(randomKaart.kaartNaam + " " + randomKaart.kaartWaarde);
+				System.out.println(puntenAantal);
+				kaarten[randomIndex] = null;
+				}
+				else {
+					i--;
+				}
+			}
+		}
 	}
-
-}
+	}
+	
 class Kaart{
 	int kaartWaarde;
 	String kaartNaam;
@@ -81,4 +121,5 @@ class Kaart{
 		kaartWaarde = waarde;
 		kaartNaam = naam;
 	}
+}
 }
